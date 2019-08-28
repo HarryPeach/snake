@@ -26,6 +26,7 @@ class Snake{
         void draw_ui();
         void draw_snake();
         void draw_food();
+        void check_food_collision();
         
     public:
         Snake(WINDOW *scr, int screen_width, int screen_height);

@@ -8,9 +8,10 @@
 void Snake::update_loop(){
     for (;;){
         clear();
+        check_collisions();
         draw_ui();
-        draw_snake();
         draw_food();
+        draw_snake();
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 }
@@ -102,4 +103,11 @@ void Snake::add_node(){
 void Snake::spawn_food(){
     m_food.x = rand() % m_window_width;
     m_food.y = rand() % m_window_height;
+}
+
+void Snake::check_food_collision(){
+    if( m_root_node.x == m_food.x && m_root_node.y == m_food.y ){
+        add_node();
+        spawn_food();
+    }
 }
