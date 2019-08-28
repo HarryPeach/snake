@@ -8,11 +8,11 @@
 void Snake::update_loop(){
     for (;;){
         clear();
-        check_collisions();
+        check_food_collision();
         draw_ui();
         draw_food();
         draw_snake();
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(m_speed));
     }
 }
 
@@ -76,14 +76,17 @@ void Snake::draw_snake(){
 
 void Snake::draw_ui(){
     CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 2, "Snake v0, press q to quit.");
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 4, "=== Debug Information ===");
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 5, "Press N to add a new node.");
+    std::ostringstream score_str_stream;
+    score_str_stream << "Score: " << m_score << " Speed: " << m_speed;
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 3, score_str_stream.str());
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 5, "=== Debug Information ===");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 6, "Press N to add a new node.");
     std::ostringstream food_str_stream;
     food_str_stream << "Current food location: (x " << m_food.x << ", y " << m_food.y << ")"; 
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 6, food_str_stream.str());
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 7, food_str_stream.str());
     std::ostringstream snake_str_stream;
     snake_str_stream << "Current snake location: (x " << m_root_node.x << ", y " << m_root_node.y << ")"; 
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 7, snake_str_stream.str());
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 8, snake_str_stream.str());
 }
 
 void Snake::draw_food(){
@@ -108,6 +111,10 @@ void Snake::spawn_food(){
 void Snake::check_food_collision(){
     if( m_root_node.x == m_food.x && m_root_node.y == m_food.y ){
         add_node();
+        m_score += 100;
+        if((m_speed - (m_score) / 20) > 0){
+            m_speed -= (m_score) / 20;
+        }
         spawn_food();
     }
 }

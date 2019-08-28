@@ -19,6 +19,9 @@ class Snake{
         int m_window_width = 0;
         int m_window_height = 0;
 
+        int m_score = 0;
+        int m_speed = 300;
+
         int m_y_delt = 0;
         int m_x_delt = 0;
         void spawn_food();
