@@ -5,8 +5,10 @@
 
 void Snake::update_loop(){
     for (;;){
-        Snake::draw_snake();
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        clear();
+        draw_ui();
+        draw_snake();
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 }
 
@@ -45,7 +47,6 @@ void Snake::move_snake(DIRECTION direction){
 }
 
 void Snake::draw_snake(){
-    clear();
     m_root_node.x += m_x_delt;
     m_root_node.y += m_y_delt;
 
@@ -59,6 +60,13 @@ void Snake::draw_snake(){
         }
         current_node = (*current_node).next;
     } while (current_node != nullptr);
+}
+
+void Snake::draw_ui(){
+    mvwaddstr(stdscr, 0, 0, "Snake v0, press q to quit.");
+    mvwaddstr(stdscr, 2, 0, "== DEBUG ==");
+    mvwaddstr(stdscr, 3, 0, "Press D to update the game");
+    mvwaddstr(stdscr, 4, 0, "Press N to add a new node");
 }
 
 void Snake::add_node(){

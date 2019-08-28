@@ -14,13 +14,12 @@ int main(){
     keypad(stdscr, true);
     // Stop getch() from blocking
     timeout(0);
+    
+    // TODO handle window resize
+    // int wx, wy;
+    // getmaxyx(stdscr, wy, wx);
 
-    mvwaddstr(stdscr, 0, 0, "Snake v0, press q to quit.");
-    mvwaddstr(stdscr, 2, 0, "== DEBUG ==");
-    mvwaddstr(stdscr, 3, 0, "Press D to update the game");
-    mvwaddstr(stdscr, 4, 0, "Press N to add a new node");
-    Snake snake(stdscr, 50, 50);
-
+    Snake snake(stdscr, 20, 20);
 
     snake.add_node();
     snake.add_node();
