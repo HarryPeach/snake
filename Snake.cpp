@@ -1,4 +1,5 @@
-#include "Snake.hpp"
+#include "include/Snake.hpp"
+#include "include/CursesHelper.hpp"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -17,6 +18,9 @@ Snake::Snake(WINDOW *scr, int screen_width, int screen_height){
 
     // Begin the update loop
     std::thread(&Snake::update_loop, this).detach();
+
+    m_window_width = screen_width;
+    m_window_height = screen_height;
 
     // Start the snake in the middle of the screen
     m_root_node.x = screen_width / 2;
@@ -63,10 +67,10 @@ void Snake::draw_snake(){
 }
 
 void Snake::draw_ui(){
-    mvwaddstr(stdscr, 0, 0, "Snake v0, press q to quit.");
-    mvwaddstr(stdscr, 2, 0, "== DEBUG ==");
-    mvwaddstr(stdscr, 3, 0, "Press D to update the game");
-    mvwaddstr(stdscr, 4, 0, "Press N to add a new node");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 2, "Snake v0, press q to quit.");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 4, "=== Debug Controls ===");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 5, "Press D to update the game.");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 6, "Press N to add a new node.");
 }
 
 void Snake::add_node(){

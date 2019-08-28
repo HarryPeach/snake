@@ -1,11 +1,14 @@
 #include "curses.h"
-#include "Node.cpp"
+#include "../Node.cpp"
 
 class Snake{
     private:
         WINDOW *m_scr;
         Node m_root_node;
         Node *m_current_tail;
+
+        int m_window_width = 0;
+        int m_window_height = 0;
 
         int m_y_delt = 0;
         int m_x_delt = 0;

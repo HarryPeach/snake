@@ -1,6 +1,6 @@
 #include <iostream>
 #include "curses.h"
-#include "Snake.hpp"
+#include "include/Snake.hpp"
 
 int main(){
     initscr();
@@ -16,10 +16,10 @@ int main(){
     timeout(0);
     
     // TODO handle window resize
-    // int wx, wy;
-    // getmaxyx(stdscr, wy, wx);
+    int wx, wy;
+    getmaxyx(stdscr, wy, wx);
 
-    Snake snake(stdscr, 20, 20);
+    Snake snake(stdscr, wx, wy);
 
     snake.add_node();
     snake.add_node();
