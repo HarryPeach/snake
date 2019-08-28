@@ -3,6 +3,11 @@
 
 class Snake{
     private:
+        struct Node {
+            int x;
+            int y;
+            Node *next;
+        };
         WINDOW *m_scr;
         Node m_root_node;
         Node *m_current_tail;
