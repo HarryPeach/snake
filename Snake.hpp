@@ -9,6 +9,7 @@ class Snake{
 
         int m_y_delt = 0;
         int m_x_delt = 0;
+        void update_loop();
         
     public:
         Snake(WINDOW *scr, int screen_width, int screen_height);

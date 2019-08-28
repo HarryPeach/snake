@@ -1,8 +1,20 @@
 #include "Snake.hpp"
 #include <iostream>
+#include <thread>
+#include <chrono>
 
-Snake::Snake(WINDOW *scr, int screen_width, int screen_height) {
+void Snake::update_loop(){
+    for (;;){
+        Snake::draw_snake();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    }
+}
+
+Snake::Snake(WINDOW *scr, int screen_width, int screen_height){
     m_scr = scr;
+
+    // Begin the update loop
+    std::thread(&Snake::update_loop, this).detach();
 
     // Start the snake in the middle of the screen
     m_root_node.x = screen_width / 2;
@@ -40,6 +52,7 @@ void Snake::draw_snake(){
     Node *current_node = m_current_tail;
     do {
         mvwaddch(m_scr, (*current_node).y, (*current_node).x, '#');
+        // mvwaddch(m_scr, 1, 1, '#');
         if (current_node != &m_root_node){
             (*current_node).x = (*current_node).next->x;
             (*current_node).y = (*current_node).next->y;

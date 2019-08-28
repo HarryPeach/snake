@@ -4,10 +4,16 @@
 
 int main(){
     initscr();
+    // Disable buffering of typing characters
     cbreak();
+    // Suppress automatic echoing of typed characters
     noecho();
+    // Remove the cursor
     curs_set(0);
+    // Captures special keys such as the arrow keys
     keypad(stdscr, true);
+    // Stop getch() from blocking
+    timeout(0);
 
     mvwaddstr(stdscr, 0, 0, "Snake v0, press q to quit.");
     mvwaddstr(stdscr, 2, 0, "== DEBUG ==");
@@ -15,6 +21,9 @@ int main(){
     mvwaddstr(stdscr, 4, 0, "Press N to add a new node");
     Snake snake(stdscr, 50, 50);
 
+
+    snake.add_node();
+    snake.add_node();
 
     for (;;){
         switch (getch()){
@@ -29,10 +38,6 @@ int main(){
                 break;
             case KEY_RIGHT:
                 snake.move_snake(Snake::DIRECTION::RIGHT);
-                break;
-            // TODO REPLACE WITH TIMER DRAW
-            case 'd':
-                snake.draw_snake();
                 break;
             // TODO REPLACE WITH FOOD TO GROW THE SNAKE
             case 'n':
