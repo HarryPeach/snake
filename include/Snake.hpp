@@ -1,5 +1,4 @@
 #include "curses.h"
-#include "../Node.cpp"
 
 class Snake{
     private:

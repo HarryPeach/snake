@@ -69,8 +69,7 @@ void Snake::draw_snake(){
 void Snake::draw_ui(){
     CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 2, "Snake v0, press q to quit.");
     CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 4, "=== Debug Controls ===");
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 5, "Press D to update the game.");
-    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 6, "Press N to add a new node.");
+    CursesHelper::draw_centered_str(stdscr, m_window_width / 2, 5, "Press N to add a new node.");
 }
 
 void Snake::add_node(){
